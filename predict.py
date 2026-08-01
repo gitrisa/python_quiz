@@ -1,9 +1,9 @@
 import numpy as np
 from PIL import Image
-import tensorflow as tf
+from ai_edge_litert.interpreter import Interpreter
 
 
-interpreter = tf.lite.Interpreter(
+interpreter = Interpreter(
     model_path="model/model.tflite"
 )
 
