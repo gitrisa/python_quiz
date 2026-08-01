@@ -6,7 +6,7 @@ from models import User
 from models import Prediction
 from flask import session
 import os
-import tensorflow as tf
+# import tensorflow as tf
 from predict import predict_image
 
 app = Flask(__name__)

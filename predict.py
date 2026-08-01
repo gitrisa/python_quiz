@@ -1,57 +1,60 @@
-import tensorflow as tf
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image
+import tensorflow as tf
 
-# Load SavedModel
-model = tf.saved_model.load("model/model.savedmodel")
 
-# Ambil fungsi inferensi
-infer = model.signatures["serving_default"]
+interpreter = tf.lite.Interpreter(
+    model_path="model/model.tflite"
+)
 
-# Load label
+interpreter.allocate_tensors()
+
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+
 with open("model/labels.txt", "r") as file:
-    labels = file.readlines()
+    labels = file.read().splitlines()
 
 
-def predict_image(image_path):
 
-    image = Image.open(image_path).convert("RGB")
+def predict_image(filepath):
 
-    image = ImageOps.fit(
-        image,
-        (224, 224),
-        Image.Resampling.LANCZOS
+    image = Image.open(filepath)
+
+    image = image.resize((224,224))
+
+    image = np.array(image)
+
+    image = np.expand_dims(image, axis=0)
+
+    image = image.astype(np.float32)
+
+    image = image / 255.0
+
+
+    interpreter.set_tensor(
+        input_details[0]["index"],
+        image
     )
 
-    image_array = np.asarray(image)
 
-    image_array = (
-        image_array.astype(np.float32) / 127.5
-    ) - 1
+    interpreter.invoke()
 
-    image_array = np.expand_dims(
-        image_array,
-        axis=0
+
+    output = interpreter.get_tensor(
+        output_details[0]["index"]
     )
 
-    tensor = tf.convert_to_tensor(
-        image_array
-    )
 
-    output = infer(tensor)
+    prediction_index = np.argmax(output)
 
-    prediction = list(
-        output.values()
-    )[0].numpy()
 
-    index = np.argmax(prediction)
+    prediction = labels[prediction_index]
 
-    confidence = float(
-        prediction[0][index]
-    ) * 100
 
-    label = labels[index].strip()
+    confidence = output[0][prediction_index] * 100
 
-    label = label.split(" ", 1)[1]
 
-    return label, round(confidence, 2)
+    return prediction, confidence
