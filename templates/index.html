@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Python Professional Quiz</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+<nav class="navbar">
+
+    <div class="logo">
+
+        Python Pro Quiz
+
+    </div>
+
+    <div>
+
+        <a href="/">Home</a>
+
+        <a href="/upload">Image Prediction</a>
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- QUIZ -->
+    <!-- ========================= -->
+
+    <div class="quiz">
+
+        <h1>Python Professional Quiz</h1>
+
+        <form method="POST">
+
+            <h2>Your Name</h2>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter your name..."
+                required>
+
+            <h2>1. Discord.py digunakan untuk...</h2>
+
+            <div class="option">
+                <input type="radio" name="q1" value="A" required>
+                Membuat Discord Bot
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q1" value="B">
+                Membuat Website
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q1" value="C">
+                Membuat Database
+            </div>
+
+            <h2>2. Framework Web Python adalah...</h2>
+
+            <div class="option">
+                <input type="radio" name="q2" value="A" required>
+                TensorFlow
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q2" value="B">
+                Flask
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q2" value="C">
+                OpenCV
+            </div>
+
+            <h2>3. BeautifulSoup digunakan untuk...</h2>
+
+            <div class="option">
+                <input type="radio" name="q3" value="A" required>
+                Web Scraping
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q3" value="B">
+                Machine Learning
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q3" value="C">
+                GUI
+            </div>
+
+            <h2>4. TensorFlow digunakan untuk...</h2>
+
+            <div class="option">
+                <input type="radio" name="q4" value="A" required>
+                Database
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q4" value="B">
+                Discord Bot
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q4" value="C">
+                Artificial Intelligence
+            </div>
+
+            <h2>5. Flask-SQLAlchemy digunakan untuk...</h2>
+
+            <div class="option">
+                <input type="radio" name="q5" value="A" required>
+                Audio
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q5" value="B">
+                Menghubungkan Flask dengan Database
+            </div>
+
+            <div class="option">
+                <input type="radio" name="q5" value="C">
+                Video
+            </div>
+
+            <input
+                class="submit"
+                type="submit"
+                value="Submit Quiz">
+
+        </form>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- LEADERBOARD -->
+    <!-- ========================= -->
+
+    <div class="leaderboard">
+
+        <h2 style="margin-top:0;">Leaderboard</h2>
+
+        <div class="score-box">
+
+            <div class="score-title">
+
+                Highest Score Overall
+
+            </div>
+
+            <h1>{{ best_score }}</h1>
+
+        </div>
+
+        <div class="score-box">
+
+            <div class="score-title">
+
+                Your Highest Score
+
+            </div>
+
+            <h1>{{ current_best }}</h1>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+<hr>
+
+Created by Risa
+
+</footer>
+
+</body>
+
+</html>

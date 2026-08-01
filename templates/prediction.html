@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Prediction</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+
+background:#ECECEC;
+
+padding:40px;
+
+}
+
+.box{
+
+width:650px;
+
+margin:auto;
+
+background:white;
+
+padding:40px;
+
+border-radius:12px;
+
+box-shadow:0 0 10px gray;
+
+text-align:center;
+
+}
+
+.result{
+
+font-size:22px;
+
+margin:20px 0;
+
+}
+
+a{
+
+text-decoration:none;
+
+color:#3498db;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Prediction Result</h1>
+
+<p><strong>Uploaded File:</strong> {{ filename }}</p>
+
+<div class="result">
+
+Prediction: <strong>{{ prediction }}</strong>
+
+<br><br>
+
+Confidence: <strong>{{ confidence }}</strong>
+
+</div>
+
+<a href="/upload">Try Another Image</a>
+
+</div>
+
+</body>
+
+</html>
